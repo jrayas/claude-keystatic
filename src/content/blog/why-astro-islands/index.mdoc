@@ -1,0 +1,21 @@
+---
+title: Why Astro Islands
+publishDate: 2026-09-25
+description: Shipping mostly-static HTML with a few interactive React components.
+---
+
+Most of this site needs no JavaScript at all — a sidebar toggle and a markdown
+renderer are the only interactive pieces. Astro's **islands architecture** lets
+each page ship as static HTML by default, with only the components marked
+`client:load` hydrating in the browser.
+
+## The trade-off
+
+| Approach | JS shipped | Interactivity |
+| --- | --- | --- |
+| Full SPA | Everything | Everywhere |
+| Traditional SSG | None | Nowhere |
+| Astro islands | Only what's marked | Only where needed |
+
+For a content site like this one, islands are close to the sweet spot: fast
+first paint, small bundles, and the sidebar still toggles instantly.

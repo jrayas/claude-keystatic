@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import '../../styles/global.css';
+
+const sheets = await getCollection('cheatsheets');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cheatsheets | Digital Garden</title>
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased">
+    <main class="max-w-2xl mx-auto px-4 sm:px-8 py-16">
+      <h1 class="text-3xl font-bold tracking-tight mb-8">Cheatsheets</h1>
+      <ul class="space-y-6">
+        {sheets.map((sheet) => (
+          <li>
+            <a href={`${base}/cheatsheets/${sheet.id}`} class="text-lg font-medium text-indigo-700 hover:underline">
+              {sheet.data.title}
+            </a>
+            {sheet.data.language && (
+              <span class="ml-2 bg-slate-100 px-2 py-0.5 rounded text-slate-700 font-mono text-xs">{sheet.data.language}</span>
+            )}
+            {sheet.data.summary && <p class="text-slate-700 mt-1">{sheet.data.summary}</p>}
+          </li>
+        ))}
+      </ul>
+    </main>
+  </body>
+</html>

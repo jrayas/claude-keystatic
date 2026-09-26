@@ -1,0 +1,41 @@
+---
+title: JavaScript Quick Reference
+language: JavaScript
+summary: Common syntax, array/object methods, and async patterns at a glance.
+---
+
+## Array methods
+
+| Method | Returns | Mutates original? |
+| --- | --- | --- |
+| `map` | new array | No |
+| `filter` | new array | No |
+| `reduce` | accumulated value | No |
+| `sort` | sorted array | Yes |
+| `splice` | removed items | Yes |
+
+## Async/await
+
+```js
+async function getUser(id) {
+  const res = await fetch(`/api/users/${id}`);
+  if (!res.ok) throw new Error('Not found');
+  return res.json();
+}
+```
+
+## Destructuring
+
+```js
+const { title, language, summary } = cheatsheet;
+const [first, ...rest] = items;
+```
+
+## Big-O quick reference
+
+Average time complexity of common operations, where $n$ is the input size:
+
+- Array access: $O(1)$
+- Linear search: $O(n)$
+- Binary search: $O(\log n)$
+- Sorting (comparison-based): $O(n \log n)$

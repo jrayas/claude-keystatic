@@ -1,0 +1,32 @@
+---
+title: Git Quick Reference
+language: Git
+summary: Everyday commands for branching, staging, and fixing mistakes.
+---
+
+## Everyday commands
+
+```bash
+git status
+git add <file>
+git commit -m "message"
+git push origin <branch>
+```
+
+## Branching
+
+| Command | Effect |
+| --- | --- |
+| `git switch -c <name>` | Create and switch to a new branch |
+| `git switch <name>` | Switch to an existing branch |
+| `git merge <name>` | Merge `<name>` into the current branch |
+| `git rebase <name>` | Replay current branch's commits onto `<name>` |
+
+## Undoing things
+
+```bash
+git restore <file>          # discard unstaged changes
+git restore --staged <file> # unstage a file
+git commit --amend          # edit the last commit
+git reset --soft HEAD~1     # undo last commit, keep changes staged
+```

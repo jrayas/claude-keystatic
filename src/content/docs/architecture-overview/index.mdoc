@@ -1,0 +1,19 @@
+---
+title: Architecture Overview
+category: architecture
+order: 1
+---
+
+## Data lifecycle
+
+Content is authored as Markdoc files, either directly (Obsidian, any text
+editor) or through the Keystatic admin UI, then committed to Git. A push to
+`main` triggers a GitHub Actions build that runs Astro's static site
+generation and publishes the result to GitHub Pages.
+
+## Rendering
+
+Each content collection (`blog`, `docs`, `cheatsheets`) is queried at build
+time via `getCollection()`, and every entry is rendered through a single
+dynamic route: `[collection]/[slug].astro`. The page shell is static HTML;
+the sidebar and markdown body render inside a hydrated React island.

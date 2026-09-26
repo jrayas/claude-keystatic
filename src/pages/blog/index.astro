@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import '../../styles/global.css';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog | Digital Garden</title>
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased">
+    <main class="max-w-2xl mx-auto px-4 sm:px-8 py-16">
+      <h1 class="text-3xl font-bold tracking-tight mb-8">Blog</h1>
+      <ul class="space-y-6">
+        {posts.map((post) => (
+          <li>
+            <a href={`${base}/blog/${post.id}`} class="text-lg font-medium text-indigo-700 hover:underline">
+              {post.data.title}
+            </a>
+            <p class="text-sm text-slate-500">{post.data.publishDate.toISOString().slice(0, 10)}</p>
+            {post.data.description && <p class="text-slate-700 mt-1">{post.data.description}</p>}
+          </li>
+        ))}
+      </ul>
+    </main>
+  </body>
+</html>

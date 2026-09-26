@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import NotionLayout from '../../components/NotionLayout.jsx';
+import '../../styles/global.css';
+
+export async function getStaticPaths() {
+  const collections = ['blog', 'docs', 'cheatsheets'];
+  const paths = [];
+
+  for (const collectionName of collections) {
+    const entries = await getCollection(collectionName);
+    for (const entry of entries) {
+      paths.push({
+        params: { collection: collectionName, slug: entry.id },
+        props: { entry },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { entry } = Astro.props;
+const title = entry.data.title;
+const contentBody = entry.body || '';
+
+const metadata = {
+  publishDate: entry.data.publishDate?.toISOString().slice(0, 10),
+  language: entry.data.language,
+  category: entry.data.category,
+};
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | Digital Garden</title>
+  </head>
+  <body>
+    <NotionLayout client:load title={title} content={contentBody} metadata={metadata} />
+  </body>
+</html>

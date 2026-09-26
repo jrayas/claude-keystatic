@@ -1,0 +1,27 @@
+---
+title: Getting Started
+category: guides
+order: 0
+---
+
+## Local development
+
+```bash
+npm install
+npm run dev
+```
+
+Visit `http://localhost:4321` for the site, and `http://localhost:4321/keystatic`
+for the content admin panel.
+
+## Adding content
+
+Create a new folder under `src/content/<collection>/<slug>/` containing an
+`index.mdoc` file with frontmatter matching that collection's schema in
+`keystatic.config.ts` — or add it through the admin panel, which writes the
+same file for you.
+
+## Deploying
+
+Pushing to `main` triggers the `deploy.yml` GitHub Actions workflow, which
+builds the site and publishes it to GitHub Pages.
