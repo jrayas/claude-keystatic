@@ -14,7 +14,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
-  site: 'https://anthirayasjoan-png.github.io',
+  site: 'https://jrayas.github.io',
   base: '/claude-keystatic',
   integrations: [
     react(),
